@@ -1,5 +1,6 @@
 var screenWidth=800, screenHeight=600, playerHeight=64;
 var player=null, gameOver=false, win=false, highScore;
+var sideUp, sideDown;
 
 function update(){
   if (!player){
@@ -7,6 +8,8 @@ function update(){
   }
 
   if (!gameOver){
+    sideUp.offsetLeft += 5 + 'px'
+    sideDown.offsetLeft += 5 + 'px'
     movePlayer();
     if (win) {
       gameOver = true;
@@ -80,6 +83,9 @@ function initGame(){
   posY=screenHeight/2;
   player.style.top = posY + "px";
   player.style.left = 40 + "px";
+
+  sideUp = document.documentElement.querySelector('.sideUp');
+  sideDown = document.documentElement.querySelector('.sideDown');
 }
 
 /*

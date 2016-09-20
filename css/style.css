@@ -3,7 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   width:800px; height:600px;
-  border:2px solid red;
+  border:2px solid black;
   background-color: gray;
 }
 
@@ -16,6 +16,22 @@
 .enemy {
   position:absolute;
   width:32px; height:32px;
+}
+
+.sideUp {
+  position:relative; top:-602px; left:0px;
+  margin-left: auto;
+  margin-right: auto;
+  background: url('../img/sideUp.png') 0 0;
+  width:800px; height:40px;
+}
+
+.sideDown {
+  position:relative; top:-82px; left:0px;
+  margin-left: auto;
+  margin-right: auto;
+  background: url('../img/sideDown.png') 0 0;
+  width:800px; height:40px;
 }
 
 .score {
