@@ -1,7 +1,14 @@
+var screenWidth=800, screenHeight=600, playerHeight=64;
+var player=null, gameOver=false, win=false, highScore;
+
 function update(){
+  if (!player){
+    initGame();
+  }
+
   if (!gameOver){
     movePlayer();
-    if (lifes < 0 || win) {
+    if (win) {
       gameOver = true;
     }
   }
@@ -11,39 +18,36 @@ function update(){
 }
 
 // ------------ Keyboard -------------
-function keyPress(evt) {
-  if (lifes < 0)
-    return;
-
-  var charCode = evt.keyCode || evt.which;
-
-  console.log(charCode);
-};
-
 function checkKeyDown(e) {
-  if (lifes < 0 || win)
+  if (win)
     return;
 
   e = e || window.event;
 
   console.log(e.keyCode);
-  // if (e.keyCode == '38') {
-  // }
-  // else if (e.keyCode == '40') {
-  // }
+  if (e.keyCode == '38' || e.keyCode == '87') { //Up || W
+    moveUp = true;
+    moveDown = false;
+  }
+  else if (e.keyCode == '40' || e.keyCode == '83') { //Down || S
+    moveDown = true;
+    moveUp = false;
+  }
   //movePlayer();
 }
 
 function checkKeyUp(e) {
-  if (lifes < 0)
+  if (win)
     return;
 
   e = e || window.event;
 
-  // if (e.keyCode == '38') {
-  // }
-  // else if (e.keyCode == '40') {
-  // }
+  if (e.keyCode == '38' || e.keyCode == '87') {
+    moveUp = false;
+  }
+  else if (e.keyCode == '40' || e.keyCode == '83') {
+    moveDown = false;
+  }
 }
 
 // ------------ Cookies -------------
@@ -62,6 +66,20 @@ function ReadCookie() {
   } else {
     return window.localStorage.highscore;;
   }
+}
+
+// ------------ Init Game ------------
+function initGame(){
+  highScore = ReadCookie();
+  document.documentElement.querySelector('.score').innerHTML = 'HighScore: ' + highScore;
+
+  player = document.createElement('div');
+  document.documentElement.querySelector('.background').appendChild(player);
+  player.className = 'player';
+
+  posY=screenHeight/2;
+  player.style.top = posY + "px";
+  player.style.left = 40 + "px";
 }
 
 /*
@@ -96,7 +114,6 @@ function createTextDiv(className, text){
 */
 
 // ------------ Events -------------
-document.addEventListener('keypress', keyPress);
 document.addEventListener('keydown', checkKeyDown);
 document.addEventListener('keyup', checkKeyUp);
 
